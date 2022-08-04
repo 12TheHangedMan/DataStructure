@@ -1,0 +1,82 @@
+using System.Collections.Generic;
+
+namespace StackExample
+{
+    class StackExample<G>   
+    {       
+        public class StackNode
+        {
+            public StackNode Next;
+            public StackNode Prev;
+            public G Value;
+
+            public StackNode(G Value)
+            {
+                this.Next=null;
+                this.Prev = null;
+                this.Value = Value;
+
+            }
+        }                 
+        public int Count { get; private set; }  
+        public StackNode head { get; set; }
+        public StackNode tail { get; set; }
+
+        public StackExample()
+        {
+            this.Count = 0;
+            this.head = null;
+            this.tail = null;
+        }
+
+        public void PushStack(G Value)
+        {
+            StackNode NewNode = new StackNode(Value);
+            if(tail is null) 
+            {
+                head = NewNode;
+                tail = NewNode;
+            }
+            else
+            {                                             
+                tail.Prev = tail;
+                tail = NewNode;
+                tail.Next = null;
+            }
+            Count++;
+        } 
+
+        public void StackDisplay()
+        {
+            StackNode NodePointer = head;
+            while(NodePointer!=null)
+            {
+                Console.Write("<-" + NodePointer.Value + "->");                
+                NodePointer = NodePointer.Next;
+            }
+            Console.WriteLine();
+        }
+
+        public void PopStack()
+        {
+            if(tail is null) 
+            {
+                Console.WriteLine("Empty Stack");
+            }
+            else
+            {
+                if(tail.Prev is null) 
+                {
+                    tail=null;
+                    head=null;
+                }
+                else
+                {
+                    tail = tail.Prev;
+                    tail.Next = null;
+                }
+                Count--;
+            }           
+        }         
+    }
+}
