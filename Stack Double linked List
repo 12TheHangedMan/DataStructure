@@ -39,8 +39,9 @@ namespace StackExample
             }
             else
             {                                             
-                tail.Prev = tail;
+                StackNode temp = tail;
                 tail = NewNode;
+                tail.Prev = temp;
                 tail.Next = null;
             }
             Count++;
